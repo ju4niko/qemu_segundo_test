@@ -29,7 +29,8 @@ BOARD=realview-pb-a8
 # tener en cuenta esto para modificar el linker script acorde
 
 #falgs para el QEMU
-VMFLGS= -M $(BOARD) -no-reboot -nographic -monitor telnet:127.0.0.1:12345,server,nowait
+PORT=12345
+VMFLGS= -M $(BOARD) -no-reboot -nographic -monitor telnet:127.0.0.1:$(PORT),server,nowait
 
 # motor de maquina virtual a utilizar
 VME=qemu-system-arm
@@ -85,5 +86,5 @@ run:
 debug:
 	$(VME) $(VMFLGS) -s -S -kernel $(BINF)
 connect:
-	telnet localhost 12345
+	telnet localhost $(PORT)
 
